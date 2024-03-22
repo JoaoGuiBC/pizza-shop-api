@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709163520918,
+      "tag": "0000_abnormal_sleepwalker",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709332919920,
+      "tag": "0001_lovely_chamber",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710951689489,
+      "tag": "0002_loud_silver_fox",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1710952947355,
+      "tag": "0003_premium_firebrand",
+      "breakpoints": true
+    }
+  ]
+}

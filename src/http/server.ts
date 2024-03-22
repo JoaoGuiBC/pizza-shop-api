@@ -4,7 +4,10 @@ import { swagger } from '@elysiajs/swagger'
 import { signOut } from './routes/sign-out'
 import { getProfile } from './routes/get-profile'
 import { approveOrder } from './routes/approve-order'
+import { cancelOrder } from './routes/cancel-order'
+import { deliverOrder } from './routes/deliver-order'
 import { sendAuthLink } from './routes/send-auth-link'
+import { dispatchOrder } from './routes/dispatch-order'
 import { getOrderDetails } from './routes/get-order-details'
 import { registerRestaurant } from './routes/register-restaurants'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
@@ -34,7 +37,10 @@ app
   .use(getManagedRestaurant)
   .use(registerRestaurant)
   .use(getOrderDetails)
+  .use(cancelOrder)
   .use(approveOrder)
+  .use(dispatchOrder)
+  .use(deliverOrder)
 
 app.listen(3333, () => {
   console.log('HTTP server running')

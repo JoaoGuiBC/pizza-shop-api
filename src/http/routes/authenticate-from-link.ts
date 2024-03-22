@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
+import { eq } from 'drizzle-orm'
 import { Elysia, t } from 'elysia'
 
 import { auth } from '../auth'
 import { db } from '@/db/connection'
 import { authLinks } from '@/db/schema'
-import { eq } from 'drizzle-orm'
 
 const routeSchema = {
   query: t.Object({

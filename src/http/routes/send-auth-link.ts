@@ -3,9 +3,9 @@ import nodemailer from 'nodemailer'
 import { createId } from '@paralleldrive/cuid2'
 
 import { env } from '@/env'
+import { mail } from '@/lib/mail'
 import { db } from '@/db/connection'
 import { authLinks } from '@/db/schema'
-import { mail } from '@/lib/mail'
 
 const routeSchema = {
   body: t.Object(

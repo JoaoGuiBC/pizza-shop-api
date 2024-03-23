@@ -3,8 +3,9 @@ import { swagger } from '@elysiajs/swagger'
 
 import { signOut } from './routes/sign-out'
 import { getProfile } from './routes/get-profile'
-import { approveOrder } from './routes/approve-order'
+import { listOrders } from './routes/list-orders'
 import { cancelOrder } from './routes/cancel-order'
+import { approveOrder } from './routes/approve-order'
 import { deliverOrder } from './routes/deliver-order'
 import { sendAuthLink } from './routes/send-auth-link'
 import { dispatchOrder } from './routes/dispatch-order'
@@ -21,9 +22,10 @@ app.use(swagger()).onError(({ code, error, set }) => {
       set.status = error.status
       return { code, message: 'validation failed.', error: error.message }
     }
+    case 'NOT_FOUND': {
+      return new Response(null, { status: 404 })
+    }
     default: {
-      console.error(error)
-
       return new Response(null, { status: 500 })
     }
   }
@@ -41,6 +43,7 @@ app
   .use(approveOrder)
   .use(dispatchOrder)
   .use(deliverOrder)
+  .use(listOrders)
 
 app.listen(3333, () => {
   console.log('HTTP server running')

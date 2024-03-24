@@ -10,9 +10,15 @@ import { deliverOrder } from './routes/deliver-order'
 import { sendAuthLink } from './routes/send-auth-link'
 import { dispatchOrder } from './routes/dispatch-order'
 import { getOrderDetails } from './routes/get-order-details'
+import { getMonthRevenue } from './routes/get-month-revenue'
+import { getPopularProducts } from './routes/get-popular-products'
 import { registerRestaurant } from './routes/register-restaurants'
+import { getDayOrdersAmount } from './routes/get-day-orders-amount'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
 import { authenticateFromLink } from './routes/authenticate-from-link'
+import { getMonthOrdersAmount } from './routes/get-month-orders-amount'
+import { getDailyRevenueInPeriod } from './routes/get-daily-revenue-in-period'
+import { getMonthCanceledOrdersAmount } from './routes/get-month-canceled-orders-amount'
 
 const app = new Elysia()
 
@@ -26,6 +32,7 @@ app.use(swagger()).onError(({ code, error, set }) => {
       return new Response(null, { status: 404 })
     }
     default: {
+      console.error(error)
       return new Response(null, { status: 500 })
     }
   }
@@ -44,6 +51,12 @@ app
   .use(dispatchOrder)
   .use(deliverOrder)
   .use(listOrders)
+  .use(getMonthRevenue)
+  .use(getDayOrdersAmount)
+  .use(getMonthOrdersAmount)
+  .use(getMonthCanceledOrdersAmount)
+  .use(getPopularProducts)
+  .use(getDailyRevenueInPeriod)
 
 app.listen(3333, () => {
   console.log('HTTP server running')

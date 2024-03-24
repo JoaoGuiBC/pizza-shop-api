@@ -1,20 +1,20 @@
 import { Elysia } from 'elysia'
 import { eq } from 'drizzle-orm'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
 import { orders } from '@/db/schema'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {
-    summary: 'Update order status from processing to delivering',
+    summary: 'Update order status from delivering to delivered',
     tags: ['orders'],
   },
 }
 
-export const dispatchOrder = new Elysia().use(auth).patch(
-  '/orders/:orderId/dispatch',
+export const deliverOrder = new Elysia().use(auth).patch(
+  '/orders/:orderId/deliver',
   async ({ getCurrentUser, set, params }) => {
     const { orderId } = params
     const { restaurantId } = await getCurrentUser()
@@ -24,8 +24,11 @@ export const dispatchOrder = new Elysia().use(auth).patch(
     }
 
     const order = await db.query.orders.findFirst({
-      where(fields, { eq }) {
-        return eq(fields.id, orderId)
+      where(fields, { eq, and }) {
+        return and(
+          eq(fields.id, orderId),
+          eq(fields.restaurantId, restaurantId),
+        )
       },
     })
 
@@ -34,14 +37,14 @@ export const dispatchOrder = new Elysia().use(auth).patch(
       return { message: 'Order not found.' }
     }
 
-    if (order.status !== 'processing') {
+    if (order.status !== 'delivering') {
       set.status = 400
-      return { message: 'Order is not processing.' }
+      return { message: 'Order is not in delivering.' }
     }
 
     await db
       .update(orders)
-      .set({ status: 'delivering' })
+      .set({ status: 'delivered' })
       .where(eq(orders.id, orderId))
   },
   routeSchema,

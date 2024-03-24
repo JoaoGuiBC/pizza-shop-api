@@ -2,20 +2,20 @@ import dayjs from 'dayjs'
 import { Elysia } from 'elysia'
 import { and, eq, gte, sql, count } from 'drizzle-orm'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
 import { orders } from '@/db/schema'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {
-    summary: 'Get current month canceled orders amount',
+    summary: 'Get current month orders amount',
     tags: ['metrics'],
   },
 }
 
-export const getMonthCanceledOrdersAmount = new Elysia().use(auth).get(
-  '/metrics/month-canceled-orders-amount',
+export const getMonthOrdersAmount = new Elysia().use(auth).get(
+  '/metrics/month-orders-amount',
   async ({ getCurrentUser }) => {
     const { restaurantId } = await getCurrentUser()
 
@@ -39,7 +39,6 @@ export const getMonthCanceledOrdersAmount = new Elysia().use(auth).get(
       .where(
         and(
           eq(orders.restaurantId, restaurantId),
-          eq(orders.status, 'canceled'),
           gte(orders.createdAt, startOfLastMonth.toDate()),
         ),
       )

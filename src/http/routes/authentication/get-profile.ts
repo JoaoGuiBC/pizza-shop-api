@@ -1,8 +1,8 @@
 import { Elysia } from 'elysia'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {

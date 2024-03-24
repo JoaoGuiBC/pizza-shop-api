@@ -1,10 +1,10 @@
 import { Elysia } from 'elysia'
 import { desc, eq, sum } from 'drizzle-orm'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
 import { orderItems, orders, products } from '@/db/schema'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {

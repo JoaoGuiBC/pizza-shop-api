@@ -2,10 +2,10 @@ import { Elysia, t } from 'elysia'
 import { createSelectSchema } from 'drizzle-typebox'
 import { and, count, desc, eq, getTableColumns, ilike, sql } from 'drizzle-orm'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
 import { orders, users } from '@/db/schema'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {

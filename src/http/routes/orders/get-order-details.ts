@@ -1,8 +1,8 @@
 import { Elysia, t } from 'elysia'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {
@@ -53,8 +53,11 @@ export const getOrderDetails = new Elysia().use(auth).get(
           },
         },
       },
-      where(fields, { eq }) {
-        return eq(fields.id, orderId)
+      where(fields, { eq, and }) {
+        return and(
+          eq(fields.id, orderId),
+          eq(fields.restaurantId, restaurantId),
+        )
       },
     })
 

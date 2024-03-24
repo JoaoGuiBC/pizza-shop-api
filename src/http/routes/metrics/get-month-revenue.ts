@@ -2,10 +2,10 @@ import dayjs from 'dayjs'
 import { Elysia } from 'elysia'
 import { and, eq, gte, sum, ne, sql } from 'drizzle-orm'
 
-import { auth } from '../auth'
+import { auth } from '../../auth'
 import { db } from '@/db/connection'
 import { orders } from '@/db/schema'
-import { UnauthorizedError } from '../errors/unauthorized-error'
+import { UnauthorizedError } from '../../errors/unauthorized-error'
 
 const routeSchema = {
   detail: {

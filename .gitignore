@@ -176,3 +176,4 @@ dist
 
 .vscode
 .devcontainer
+bun.session.sql

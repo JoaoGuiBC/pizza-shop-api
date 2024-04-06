@@ -1,9 +1,27 @@
 import { Elysia } from 'elysia'
+import { cors } from '@elysiajs/cors'
 import { swagger } from '@elysiajs/swagger'
 
 import { routes } from './routes'
 
 const app = new Elysia()
+
+app.use(
+  cors({
+    credentials: true,
+    allowedHeaders: ['content-type'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+    origin: (request): boolean => {
+      const origin = request.headers.get('origin')
+
+      if (!origin) {
+        return false
+      }
+
+      return true
+    },
+  }),
+)
 
 app.use(swagger()).onError(({ code, error, set }) => {
   switch (code) {

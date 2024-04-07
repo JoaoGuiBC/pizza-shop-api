@@ -40,7 +40,7 @@ export const listOrders = new Elysia().use(auth).get(
         and(
           eq(orders.restaurantId, restaurantId),
           orderId ? ilike(orders.id, `%${orderId}%`) : undefined,
-          status ? eq(orders.id, status) : undefined,
+          status ? eq(orders.status, status) : undefined,
           customerName ? ilike(users.name, `%${customerName}%`) : undefined,
         ),
       )

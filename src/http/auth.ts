@@ -11,17 +11,6 @@ const jwtPayload = t.Object({
 })
 
 export const auth = new Elysia()
-  .error({
-    UNAUTHORIZED: UnauthorizedError,
-  })
-  .onError(({ error, code, set }) => {
-    switch (code) {
-      case 'UNAUTHORIZED': {
-        set.status = 401
-        return { code, message: error.message }
-      }
-    }
-  })
   .use(
     jwt({
       secret: env.JWT_SECRET_KEY,

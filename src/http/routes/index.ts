@@ -10,6 +10,7 @@ import { getProfile } from './authentication/get-profile'
 import { getOrderDetails } from './orders/get-order-details'
 import { getMonthRevenue } from './metrics/get-month-revenue'
 import { sendAuthLink } from './authentication/send-auth-link'
+import { updateProfile } from './authentication/update-profile'
 import { getPopularProducts } from './metrics/get-popular-products'
 import { getDayOrdersAmount } from './metrics/get-day-orders-amount'
 import { registerRestaurant } from './restaurant/register-restaurants'
@@ -38,3 +39,4 @@ export const routes = new Elysia()
   .use(getMonthCanceledOrdersAmount)
   .use(getPopularProducts)
   .use(getDailyRevenueInPeriod)
+  .use(updateProfile)
